@@ -40,7 +40,7 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           'style-loader',
-          'css-loader?modules',
+          'css-loader?modules=true&camelCase=true',
           'postcss-loader',
           'sass-loader'
         ],

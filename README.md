@@ -2,4 +2,4 @@
 	1. Clone this repo
 	2. `npm install`
 	3. `npm start`
-	4.
+	4. Go to 'http://localhost:8080' in your browser

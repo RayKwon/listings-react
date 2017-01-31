@@ -1,0 +1,1 @@
+export const LOAD_LISTINGS = 'LOAD_LISTINGS';

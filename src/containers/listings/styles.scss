@@ -1,0 +1,41 @@
+.root {
+  max-width: 1200px;
+  padding: 50px 0 0 0;
+  margin: 0 auto;
+}
+
+.results {
+	float: left;
+	width: 60%;
+	padding: 0 20px;
+	margin: 0 10px;
+	border: solid 1px #eaeaea;
+	background-color: #fff;
+
+	h2 {
+		padding: 0 0 0 10px;
+	}
+}
+
+.saved-listings {
+	float: left;
+	width: 25%;
+	padding: 0 20px;
+	margin: 0 10px;
+	border: solid 1px #eaeaea;
+	background-color: #fff;
+
+	h4 {
+		line-height: 28px;
+		padding: 0 0 0 5px;
+	}
+}
+
+@media(max-width: 850px) {
+	.results,
+	.saved-listings {
+		width: 80%;
+		margin:0 auto 50px auto;
+		float: none;
+	}
+}
