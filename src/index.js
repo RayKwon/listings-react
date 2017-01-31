@@ -2,34 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { createStore } from 'redux';
-
+import { Provider } from 'react-redux';
 import styles from './styles.scss';
-import Listings from './containers/listings';
-import { loadListings } from './containers/listings/actions';
+import ListingsPage from './containers/listings';
 import listingsReducer from './containers/listings/reducer';
-import { LOAD_LISTINGS } from './containers/listings/constants';
-import { mockedListings } from './mocked-listings';
-
 
 let store = createStore(listingsReducer);
-let listings = [];
-store.subscribe(() => listings = store.getState());
-store.dispatch(loadListings(mockedListings));
-
 
 ReactDOM.render(
   <AppContainer>
-    <Listings data={listings} />
+  	<Provider store={store}>
+    	<ListingsPage />
+    </Provider>
   </AppContainer>,
   document.getElementById('app')
 );
-
 
 if (module.hot) {
   module.hot.accept('./containers/listings', () => {
   	ReactDOM.render(
 	    <AppContainer>
-	      <Listings data={listings} />
+	      <Provider store={store}>
+		    	<ListingsPage />
+		    </Provider>
 	    </AppContainer>,
 	    document.getElementById('app')
 	  );

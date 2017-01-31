@@ -1,12 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './styles.scss';
 import Listing from '../../components/listing';
+import listingsReducer from './reducer';
+import { loadListings } from './actions';
+import { mockedListings } from '../../mocked-listings';
 
 const propTypes = {
 	data: React.PropTypes.object
 };
 
-export default class Listings extends React.PureComponent {
+export class ListingsPage extends React.PureComponent {
 	render() {
 		const listings = this.props.data.results.map(listing => <Listing listing={listing} key={listing.id} />);
 		const savedListings = this.props.data.saved.map(listing => <Listing listing={listing} key={listing.id} />);
@@ -29,4 +33,17 @@ export default class Listings extends React.PureComponent {
 	}
 }
 
-Listings.propTypes = propTypes;
+ListingsPage.propTypes = propTypes;
+
+const mapStateToProps = state => ({
+	data: listingsReducer(state, loadListings(mockedListings))
+});
+
+export default connect(mapStateToProps)(ListingsPage);
+
+
+
+
+
+
+
