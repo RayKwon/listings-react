@@ -3,28 +3,37 @@ import { connect } from 'react-redux';
 import styles from './styles.scss';
 import Listing from '../../components/listing';
 import listingsReducer from './reducer';
-import { loadListings } from './actions';
+import { loadListings, saveProperty, removeProperty } from './actions';
 import { mockedListings } from '../../mocked-listings';
 
-const propTypes = {
-	data: React.PropTypes.object
-};
-
 export class ListingsPage extends React.PureComponent {
+
+	static propTypes = {
+		data: React.PropTypes.object,
+		onSaveClick: React.PropTypes.func,
+		onRemoveClick: React.PropTypes.func
+	}
+
 	render() {
-		const listings = this.props.data.results.map(listing => <Listing listing={listing} key={listing.id} />);
-		const savedListings = this.props.data.saved.map(listing => <Listing listing={listing} key={listing.id} />);
+
+		const results = this.props.data && this.props.data.results ? this.props.data.results.map(listing => {
+			return (<Listing key={listing.id} listing={listing} onSaveClick={this.props.onSaveClick} />);
+		}) : null;
+
+		const savedListings = this.props.data && this.props.data.saved ? this.props.data.saved.map(listing => {
+			return (<Listing key={listing.id} listing={listing} onRemoveClick={this.props.onRemoveClick} />);
+		}) : null;
 
 		return (
 		  <div className={styles.root}>
 
 		  	<div className={styles.results}>
-		  		<h2>{listings.length} Results</h2>
-		  		{listings}
+		  		<h2>{results.length} Results</h2>
+		  		{results}
 		  	</div>
 
 		  	<div className={styles.savedListings}>
-		  		<h4>{savedListings.length} Saved Properties</h4>
+		  		<h4>{savedListings.length} Saved properties</h4>
 		  		{savedListings}
 		  	</div>
 
@@ -33,17 +42,13 @@ export class ListingsPage extends React.PureComponent {
 	}
 }
 
-ListingsPage.propTypes = propTypes;
-
 const mapStateToProps = state => ({
-	data: listingsReducer(state, loadListings(mockedListings))
+	data: state.listings
 });
 
-export default connect(mapStateToProps)(ListingsPage);
+const mapDispatchToProps = dispatch => ({
+	onSaveClick: listing => dispatch(saveProperty(listing)),
+	onRemoveClick: listing => dispatch(removeProperty(listing))
+});
 
-
-
-
-
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(ListingsPage);

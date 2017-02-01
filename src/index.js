@@ -5,9 +5,9 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import styles from './styles.scss';
 import ListingsPage from './containers/listings';
-import listingsReducer from './containers/listings/reducer';
+import allReducers from './reducers';
 
-let store = createStore(listingsReducer);
+let store = createStore(allReducers);
 
 ReactDOM.render(
   <AppContainer>

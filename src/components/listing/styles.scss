@@ -1,7 +1,19 @@
+$remove-property-color: #e4002b;
+$save-property-color: #1EBDB2;
+
 .root {
 	border: solid 1px #eaeaea;
 	margin: 0 0 30px 0;
 	box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+
+	&:hover {
+		.body {
+			.actions {
+				opacity: 1;
+			  transform: translate(0, 0px);
+			}
+		}
+	}
 }
 
 .heading {
@@ -15,6 +27,9 @@
 }
 
 .body {
+	position: relative;
+	overflow: hidden;
+
 	img {
 		width: 100%;
 		height: auto;
@@ -22,6 +37,52 @@
 		vertical-align: middle;
 		margin: 0 auto;
 	}
+
+	.actions {
+		position: absolute;
+		bottom: 10px;
+		width: 100%;
+		text-align: center;
+		opacity: 0;
+		transform: translate(0, 5px);
+		transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+
+		button {
+			padding: 12px 28px;
+			border-radius: 4px;
+			background-color: #fff;
+			box-shadow: none;
+			outline:0;
+			color: #333;
+			font-size: 1.025rem;
+			border: solid 1px transparent;
+			background-color: transparent;
+			color: #fff;
+			cursor: pointer;
+			border-radius: 30px;
+
+			&.save-button {
+				border: solid 1px $save-property-color;
+				background-color: $save-property-color;
+
+				&:hover {
+					background-color: darken($save-property-color, 10%);
+					border-color: darken($save-property-color, 10%);
+				}
+			}
+
+			&.remove-button {
+				border: solid 1px $remove-property-color;
+				background-color: $remove-property-color;
+
+				&:hover {
+					background-color: darken($remove-property-color, 10%);
+					border-color: darken($remove-property-color, 10%);
+				}
+			}
+		}
+	}
+
 }
 
 .footer {
