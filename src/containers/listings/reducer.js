@@ -20,9 +20,10 @@ export default function listingsReducer(state = initialState, action) {
 		  }
 
 		case REMOVE_PROPERTY :
-			const at = state.saved.indexOf(action.listing);
-			state.saved.splice(at, 1);
-			return Object.assign({}, state);
+			let savedItems = [...state.saved];
+			const at = savedItems.indexOf(action.listing);
+			savedItems.splice(at, 1);
+			return Object.assign({}, state, { results: state.results, saved: savedItems });
 
 		default :
 			return state;
