@@ -13,9 +13,10 @@ export default function listingsReducer(state = initialState, action) {
 		  if (state.saved.indexOf(action.listing) >= 0) {
 		  	return state;
 		  }else{
+		  	let savedItems = [...state.saved];
 		  	action.listing.isSaved = true;
-		  	state.saved.push(action.listing);
-				return Object.assign({}, state);
+		  	savedItems.push(action.listing);
+				return Object.assign({}, state, { results: state.results, saved: savedItems });
 		  }
 
 		case REMOVE_PROPERTY :
