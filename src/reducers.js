@@ -2,7 +2,7 @@ import { createStore, combineReducers } from 'redux';
 import listingsReducer from './containers/listings/reducer';
 
 const allReducers = combineReducers({
-	listingsxx: listingsReducer
+	listings: listingsReducer
 });
 
 export default allReducers;

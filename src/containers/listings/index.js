@@ -53,7 +53,7 @@ export class ListingsPage extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-	data: state.listingsxx
+	data: state.listings
 });
 
 const mapDispatchToProps = dispatch => ({
