@@ -25,19 +25,19 @@ describe('ListingsPage reducer', () => {
 	it('should return the initial state', () => {
 		expect(
 			reducer(undefined, {})
-		).toEqual(mockedListings);
+		).toEqual({results: [], saved: []});
 	});
 
-	it('LOAD_LISTINGS should return three listings in results key', () => {
+	it('LOAD_LISTINGS should return no listings in results key', () => {
 		expect(
 			reducer(undefined, { type: LOAD_LISTINGS }).results.length
-		).toEqual(3);
+		).toEqual(0);
 	});
 
-	it('LOAD_LISTINGS should return one listing in saved key', () => {
+	it('LOAD_LISTINGS should return no listing in saved key', () => {
 		expect(
 			reducer(undefined, { type: LOAD_LISTINGS }).saved.length
-		).toEqual(1);
+		).toEqual(0);
 	});
 
 	it('SAVE_PROPERTY should save listing', () => {

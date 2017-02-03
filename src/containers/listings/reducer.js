@@ -2,7 +2,7 @@ import { LOAD_LISTINGS, SAVE_PROPERTY, REMOVE_PROPERTY } from './constants';
 import { mockedListings } from '../../mocked-listings';
 import { loadListings } from './actions'
 
-const initialState = loadListings(mockedListings).listings;
+const initialState = {results: [], saved: []};
 
 export default function listingsReducer(state = initialState, action) {
 	switch(action.type) {
@@ -16,7 +16,11 @@ export default function listingsReducer(state = initialState, action) {
 		  	let savedItems = [...state.saved];
 		  	action.listing.isSaved = true;
 		  	savedItems.push(action.listing);
-				return Object.assign({}, state, { results: state.results, saved: savedItems });
+
+		  	let resultItems = [...state.results];
+		  	resultItems.forEach(item => item.isSaved = item.id === action.listing.id ? true : item.isSaved );
+
+				return Object.assign({}, state, { results: resultItems, saved: savedItems });
 		  }
 
 		case REMOVE_PROPERTY :

@@ -11,7 +11,13 @@ export class ListingsPage extends React.PureComponent {
 	static propTypes = {
 		data: React.PropTypes.object,
 		onSaveClick: React.PropTypes.func,
-		onRemoveClick: React.PropTypes.func
+		onRemoveClick: React.PropTypes.func,
+		loadListings: React.PropTypes.func
+	}
+
+	constructor(props) {
+		super(props);
+		this.props.loadListings();
 	}
 
 	render() {
@@ -20,20 +26,24 @@ export class ListingsPage extends React.PureComponent {
 			return (<Listing key={listing.id} listing={listing} onSaveClick={this.props.onSaveClick} />);
 		}) : null;
 
+		const totalResults = results ? results.length : 0;
+
 		const savedListings = this.props.data && this.props.data.saved ? this.props.data.saved.map(listing => {
 			return (<Listing key={listing.id} listing={listing} onRemoveClick={this.props.onRemoveClick} />);
 		}) : null;
+
+		const totalSavedListings = savedListings ? savedListings.length : 0;
 
 		return (
 		  <div className={styles.root}>
 
 		  	<div className={styles.results}>
-		  		<h2>{results.length} Results</h2>
+		  		<h2>{totalResults} Results</h2>
 		  		{results}
 		  	</div>
 
 		  	<div className={styles.savedListings}>
-		  		<h4>{savedListings.length} Saved properties</h4>
+		  		<h4>{totalSavedListings} Saved properties</h4>
 		  		{savedListings}
 		  	</div>
 
@@ -43,12 +53,13 @@ export class ListingsPage extends React.PureComponent {
 }
 
 const mapStateToProps = state => ({
-	data: state.listings
+	data: state.listingsxx
 });
 
 const mapDispatchToProps = dispatch => ({
 	onSaveClick: listing => dispatch(saveProperty(listing)),
-	onRemoveClick: listing => dispatch(removeProperty(listing))
+	onRemoveClick: listing => dispatch(removeProperty(listing)),
+	loadListings: () => dispatch(loadListings(mockedListings))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListingsPage);

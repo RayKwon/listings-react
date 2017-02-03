@@ -7,7 +7,10 @@ import styles from './styles.scss';
 import ListingsPage from './containers/listings';
 import allReducers from './reducers';
 
-let store = createStore(allReducers);
+let store = createStore(allReducers,
+	process.env.NODE_ENV !== 'production' &&
+	window.__REDUX_DEVTOOLS_EXTENSION__ &&
+	window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <AppContainer>
